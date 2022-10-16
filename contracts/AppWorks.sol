@@ -1,38 +1,55 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.17;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
+//import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 
 
-contract AppWorks_J is ERC721, Ownable {
-  using Strings for uint256;
-  
-  using Counters for Counters.Counter;
-  Counters.Counter private _nextTokenId;
+contract AppWorks_J is ERC721Upgradeable, OwnableUpgradeable {
+      using StringsUpgradeable for uint256;
+      using CountersUpgradeable for CountersUpgradeable.Counter;
+      
+      CountersUpgradeable.Counter private _nextTokenId;
 
-  uint256 public price = 0.01 ether;
-  uint256 public constant maxSupply = 100;
-  uint256 public currentSupply = 0; 
-  string public baseExtension = ".json";
-  string public notRevealedUri;
- 
-  bool public mintActive = false;
-  bool public earlyMintActive = false;
-  bool public revealed = false;
-  
-  string public baseURI;
-  bytes32 public merkleRoot;
+      uint256 public price;
+      uint256 public maxSupply;
+      uint256 public currentSupply;
+      string public baseExtension;
+      string public notRevealedUri;
+    
+      bool public mintActive;
+      bool public earlyMintActive;
+      bool public revealed;
+    
+      string public baseURI;
+      bytes32 public merkleRoot;
 
-  mapping(uint256 => string) private _tokenURIs;
-  mapping(address => uint256) public addressMintedBalance;
-  mapping(address => bool) public whitelistClaimed;
+      mapping(uint256 => string) private _tokenURIs;
+      mapping(address => uint256) public addressMintedBalance;
+      mapping(address => bool) public whitelistClaimed;
 
-  constructor(
-      string memory _initNotRevealedUri
-  ) ERC721("AppWorks", "AW") {
+    //   constructor(
+    //       string memory _initNotRevealedUri
+    //   ) ERC721("AppWorks", "AW") {
+    //       setNotRevealedURI(_initNotRevealedUri);
+    //   }
+
+  function initialize(string memory _initNotRevealedUri) initializer public {
+    __ERC721_init("AppWorks", "AW");
+
+      price = 0.01 ether;
+      maxSupply = 100;
+      currentSupply = 0; 
+      baseExtension = ".json";
+      notRevealedUri;
+    
+      mintActive = false;
+      earlyMintActive = false;
+      revealed = false;
+      
       setNotRevealedURI(_initNotRevealedUri);
   }
 
@@ -91,7 +108,7 @@ contract AppWorks_J is ERC721, Ownable {
   }
 
   // Implement setNotRevealedURI(newBaseURI) Function to set BaseURI - week 9
-  function setNotRevealedURI(string memory _notRevealedUri) public onlyOwner() {
+  function setNotRevealedURI(string memory _notRevealedUri) public {
       notRevealedUri = _notRevealedUri;
   }
 
@@ -129,7 +146,7 @@ contract AppWorks_J is ERC721, Ownable {
     bytes32 leaf = keccak256(abi.encodePacked(msg.sender)); //Generate a leaf from the caller of this function
     
     require(
-        MerkleProof.verify(_merkleProof, merkleRoot, leaf), 
+        MerkleProofUpgradeable.verify(_merkleProof, merkleRoot, leaf), 
         "Invalid Merkle Proof.");//Check for an invalid proof
     
     whitelistClaimed[msg.sender] = true;

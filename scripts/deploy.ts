@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import { ethers, upgrades } from "hardhat";
 
 async function main() {
   // const currentTimestampInSeconds = Math.round(Date.now() / 1000);
@@ -8,7 +8,7 @@ async function main() {
   //const lockedAmount = ethers.utils.parseEther("0.01");
 
   const AppWorks_J = await ethers.getContractFactory("AppWorks_J");
-  const appworks = await AppWorks_J.deploy("_initNotRevealedUri");
+  const appworks = await upgrades.deployProxy(AppWorks_J, [""]);
   // const Lock = await ethers.getContractFactory("Lock");
   //const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
 
