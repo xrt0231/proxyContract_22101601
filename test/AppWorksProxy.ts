@@ -1,14 +1,17 @@
 import { expect } from "chai";
 import { ethers, upgrades } from "hardhat";
-import { appWorksProxySol } from "../typechain-types/factories/contracts";
 
-describe("AppWorks contract", function () {
-    it('Deployment should show the total supply of tokens', async function () {
-        const [owner] = await ethers.getSigners();
+//Start test block
+describe("AppWorks contract", async function () {
+    beforeEach(async function() {
         const AppWorks_J = await ethers.getContractFactory("AppWorks_J")
-        //const appworksToken = await AppWorks_J.deploy("setNotRevealedURI");
-        const appworks_j = await upgrades.deployProxy(AppWorks_J);
-        const ownerBalance = await appworks_j.balanceOf(owner.address);
-        expect(await appworks_j.withdrawBalance()).to.equal(ownerBalance);
+        const appworks_j = await upgrades.deployProxy(AppWorks_J,[100], { initializer: 'retrieve'});
+
+        //Test case
+        it('retrieve returns a value previously initialized', async function () {
+            //Test if the returned value is the same one
+            //Note that we need to use strings to compare the 256 bit integers
+            expect(await appworks_j.retrieve()).to.equal('100');
+        })
     })
-  });
+});

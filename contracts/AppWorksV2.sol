@@ -38,21 +38,26 @@ contract AppWorks_J is ERC721Upgradeable, OwnableUpgradeable {
     //       setNotRevealedURI(_initNotRevealedUri);
     //   }
 
-  function initialize() initializer public {
-    __ERC721_init("AppWorks", "AW");
+//   function initialize(string memory _initNotRevealedUri) initializer public {
+//     __ERC721_init("AppWorks", "AW");
 
-      price = 0.01 ether;
-      maxSupply = 100;
-      currentSupply = 0; 
-      baseExtension = ".json";
-      notRevealedUri;
-      value = 111;
+//       price = 0.01 ether;
+//       maxSupply = 100;
+//       currentSupply = 0; 
+//       baseExtension = ".json";
+//       notRevealedUri;
+//       value = 111;
     
-      mintActive = false;
-      earlyMintActive = false;
-      revealed = false;
+//       mintActive = false;
+//       earlyMintActive = false;
+//       revealed = false;
       
-      notRevealedUri = "https://ipfs.io/ipfs/QmV8HGvHpHg81yWFCzwx7hcs7dMbQVrzA5eTFY4iKx6a13/reveal.jpg";
+//       setNotRevealedURI(_initNotRevealedUri);
+//   }
+
+//For upgrade notRevealUri
+  function setNotRevealedURI(string memory _notRevealedUri) public {
+      notRevealedUri = _notRevealedUri;
   }
 
   //For testing use
