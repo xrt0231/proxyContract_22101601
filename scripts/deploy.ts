@@ -2,8 +2,10 @@ import { ethers, upgrades } from "hardhat";
 
 async function main() {
  
-  const AppWorks_J = await ethers.getContractFactory("AppWorks_J");
-  const appworks = await upgrades.deployProxy(AppWorks_J, [""]);
+  const AppWorks_J_V1 = await ethers.getContractFactory("AppWorks_J_V1");
+  const appworks = await upgrades.deployProxy(AppWorks_J_V1, [42], {
+    initializer: "initialize",
+   });
 
   await appworks.deployed();
   

@@ -5,13 +5,13 @@ import { ethers, upgrades } from "hardhat";
 describe("AppWorks contract", async function () {
     beforeEach(async function() {
         const AppWorks_J = await ethers.getContractFactory("AppWorks_J")
-        const appworks_j = await upgrades.deployProxy(AppWorks_J,[100], { initializer: 'retrieve'});
+        const appworks_j = await upgrades.deployProxy(AppWorks_J,[42], { initializer: "initialize"});
 
         //Test case
         it('retrieve returns a value previously initialized', async function () {
             //Test if the returned value is the same one
             //Note that we need to use strings to compare the 256 bit integers
-            expect(await appworks_j.retrieve()).to.equal('100');
+            expect(await appworks_j.initialize()).to.equal('42');
         })
     })
 });

@@ -38,7 +38,8 @@ contract AppWorks_J is ERC721Upgradeable, OwnableUpgradeable {
     //       setNotRevealedURI(_initNotRevealedUri);
     //   }
 
-  function initialize() initializer public {
+  function initialize(uint _val) initializer public {
+    value = _val;
     __ERC721_init("AppWorks", "AW");
 
       price = 0.01 ether;

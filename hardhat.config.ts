@@ -12,11 +12,14 @@ const config: HardhatUserConfig = {
     goerli: {
       url: `${process.env.URL}`,
       accounts: [`${process.env.PK}`],
-      gas: "auto",
-      gasPrice: "auto",
-      from: "0x0F28506EFEeA23CEAdcBFa641337424976315B15"
+      // gas: "auto",
+      // gasPrice: "auto",
+      // from: "0x0F28506EFEeA23CEAdcBFa641337424976315B15"
     }
-  }
+  },
+  etherscan: {
+    apiKey: process.env.API_KEY,
+  },
 };
 
 //console.log(config.networks);

@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 
 
-contract AppWorks_J is ERC721Upgradeable, OwnableUpgradeable {
+contract AppWorks_J_V2 is ERC721Upgradeable, OwnableUpgradeable {
       using StringsUpgradeable for uint256;
       using CountersUpgradeable for CountersUpgradeable.Counter;
       
