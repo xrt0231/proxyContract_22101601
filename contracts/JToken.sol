@@ -8,7 +8,7 @@ import "@openzeppelin/contracts-upgradeable/utils/CountersUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/MerkleProofUpgradeable.sol";
 
 
-contract AppWorks_J_V2 is ERC721Upgradeable, OwnableUpgradeable {
+contract JToken is ERC721Upgradeable, OwnableUpgradeable {
       using StringsUpgradeable for uint256;
       using CountersUpgradeable for CountersUpgradeable.Counter;
       
@@ -38,26 +38,22 @@ contract AppWorks_J_V2 is ERC721Upgradeable, OwnableUpgradeable {
     //       setNotRevealedURI(_initNotRevealedUri);
     //   }
 
-//   function initialize(string memory _initNotRevealedUri) initializer public {
-//     __ERC721_init("AppWorks", "AW");
+  function initialize(uint _val) initializer public {
+    value = _val;
+    __ERC721_init("AppWorks", "AW");
 
-//       price = 0.01 ether;
-//       maxSupply = 100;
-//       currentSupply = 0; 
-//       baseExtension = ".json";
-//       notRevealedUri;
-//       value = 111;
+      price = 0.01 ether;
+      maxSupply = 100;
+      currentSupply = 0; 
+      baseExtension = ".json";
+      notRevealedUri;
+      value = 111;
     
-//       mintActive = false;
-//       earlyMintActive = false;
-//       revealed = false;
+      mintActive = false;
+      earlyMintActive = false;
+      revealed = false;
       
-//       setNotRevealedURI(_initNotRevealedUri);
-//   }
-
-//For upgrade notRevealUri
-  function setNotRevealedURI(string memory _notRevealedUri) public {
-      notRevealedUri = _notRevealedUri;
+      notRevealedUri = "https://ipfs.io/ipfs/QmV8HGvHpHg81yWFCzwx7hcs7dMbQVrzA5eTFY4iKx6a13/reveal.jpg";
   }
 
   //For testing use
