@@ -3,6 +3,7 @@ import "@nomicfoundation/hardhat-toolbox";
 import '@openzeppelin/hardhat-upgrades'; 
 import '@nomiclabs/hardhat-ethers';
 import * as dotenv from 'dotenv';
+import '@nomiclabs/hardhat-etherscan';
 
 dotenv.config();
 
